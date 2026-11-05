@@ -31,24 +31,24 @@
             <div class="line"></div>
             <legend class="legend">Menu</legend>
             <label>Título e URL (Link 1)
-                <input id="menu_link_1_titulo">
-                <input id="menu_link_1_url">
+                <input id="menu_link1_titulo">
+                <input id="menu_link1_url">
             </label>
             <label>Título e URL (Link 2)
-                <input id="menu_link_2_titulo">
-                <input id="menu_link_2_url">
+                <input id="menu_link2_titulo">
+                <input id="menu_link2_url">
             </label>
             <label>Título e URL (Link 3)
-                <input id="menu_link_3_titulo">
-                <input id="menu_link_3_url">
+                <input id="menu_link3_titulo">
+                <input id="menu_link3_url">
             </label>
             <label>Título e URL (Link 4)
-                <input id="menu_link_4_titulo">
-                <input id="menu_link_4_url">
+                <input id="menu_link4_titulo">
+                <input id="menu_link4_url">
             </label>
             <label>Título e URL (Link 5)
-                <input id="menu_link_5_titulo">
-                <input id="menu_link_5_url">
+                <input id="menu_link5_titulo">
+                <input id="menu_link5_url">
             </label>
         </fieldset>
         <fieldset>
@@ -58,30 +58,32 @@
                 <input id="submenu_link_url">
             </label>
             <label>Título e URL (Link 1)
-                <input id="submenu_link_1_titulo">
-                <input id="submenu_link_1_url">
+                <input id="submenu_link1_titulo">
+                <input id="submenu_link1_url">
             </label>
             <label>Título e URL (Link 2)
-                <input id="submenu_link_2_titulo">
-                <input id="submenu_link_2_url">
+                <input id="submenu_link2_titulo">
+                <input id="submenu_link2_url">
             </label>
             <label>Título e URL (Link 3)
-                <input id="submenu_link_3_titulo">
-                <input id="submenu_link_3_url">
+                <input id="submenu_link3_titulo">
+                <input id="submenu_link3_url">
             </label>
             <label>Título e URL (Link 4)
-                <input id="submenu_link_4_titulo">
-                <input id="submenu_link_4_url">
+                <input id="submenu_link4_titulo">
+                <input id="submenu_link4_url">
             </label>
             <div class="line"></div>
             <legend class="legend">Parceiros</legend>
-            <label>URL da Imagem e Página (Link 1)
-                <input id="parceiro_link_1_img">
-                <input id="parceiro_link_1_url">
+            <label>URL das Imagens (180x40 / 120x60) e Página (Link 1)
+                <input id="parceiro_link1_desktop_img">
+                <input id="parceiro_link1_mobile_img">
+                <input id="parceiro_link1_url">
             </label>
-            <label>URL da Imagem e Página (Link 2)
-                <input id="parceiro_link_2_img">
-                <input id="parceiro_link_2_url">
+            <label>URL das Imagens (180x40 / 120x60) e Página (Link 2)
+                <input id="parceiro_link2_desktop_img">
+                <input id="parceiro_link2_mobile_img">
+                <input id="parceiro_link2_url">
             </label>
         </fieldset>
     </div>
@@ -98,7 +100,7 @@
         })
         .catch(erro => {
             console.error(erro);
-            menu_link_1_titulo.value = 'Erro ao carregar o conteúdo';
+            menu_link1_titulo.value = 'Erro ao carregar o conteúdo';
         });
 </script>
 </body>

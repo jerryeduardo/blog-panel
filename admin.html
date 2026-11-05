@@ -54,24 +54,24 @@
         <div class="line"></div>
         <legend class="legend">Menu</legend>
         <label>Título e URL (Link 1)
-            <input id="f_menu_link_1_titulo">
-            <input id="f_menu_link_1_url">
+            <input id="f_menu_link1_titulo">
+            <input id="f_menu_link1_url">
         </label>
         <label>Título e URL (Link 2)
-            <input id="f_menu_link_2_titulo">
-            <input id="f_menu_link_2_url">
+            <input id="f_menu_link2_titulo">
+            <input id="f_menu_link2_url">
         </label>
         <label>Título e URL (Link 3)
-            <input id="f_menu_link_3_titulo">
-            <input id="f_menu_link_3_url">
+            <input id="f_menu_link3_titulo">
+            <input id="f_menu_link3_url">
         </label>
         <label>Título e URL (Link 4)
-            <input id="f_menu_link_4_titulo">
-            <input id="f_menu_link_4_url">
+            <input id="f_menu_link4_titulo">
+            <input id="f_menu_link4_url">
         </label>
         <label>Título e URL (Link 5)
-            <input id="f_menu_link_5_titulo">
-            <input id="f_menu_link_5_url">
+            <input id="f_menu_link5_titulo">
+            <input id="f_menu_link5_url">
         </label>
     </fieldset>
     <fieldset>
@@ -81,30 +81,32 @@
             <input id="f_submenu_link_url">
         </label>
         <label>Título e URL (Link 1)
-            <input id="f_submenu_link_1_titulo">
-            <input id="f_submenu_link_1_url">
+            <input id="f_submenu_link1_titulo">
+            <input id="f_submenu_link1_url">
         </label>
         <label>Título e URL (Link 2)
-            <input id="f_submenu_link_2_titulo">
-            <input id="f_submenu_link_2_url">
+            <input id="f_submenu_link2_titulo">
+            <input id="f_submenu_link2_url">
         </label>
         <label>Título e URL (Link 3)
-            <input id="f_submenu_link_3_titulo">
-            <input id="f_submenu_link_3_url">
+            <input id="f_submenu_link3_titulo">
+            <input id="f_submenu_link3_url">
         </label>
         <label>Título e URL (Link 4)
-            <input id="f_submenu_link_4_titulo">
-            <input id="f_submenu_link_4_url">
+            <input id="f_submenu_link4_titulo">
+            <input id="f_submenu_link4_url">
         </label>
         <div class="line"></div>
         <legend class="legend">Parceiros</legend>
-        <label>URL da Imagem e Página (Link 1)
-            <input id="f_parceiro_link_1_img">
-            <input id="f_parceiro_link_1_url">
+        <label>URL das Imagens (180x40 / 120x60) e Página (Link 1)
+            <input id="f_parceiro_link1_desktop_img">
+            <input id="f_parceiro_link1_mobile_img">
+            <input id="f_parceiro_link1_url">
         </label>
-        <label>URL da Imagem e Página (Link 2)
-            <input id="f_parceiro_link_2_img">
-            <input id="f_parceiro_link_2_url">
+        <label>URL das Imagens (180x40 / 120x60) e Página (Link 2)
+            <input id="f_parceiro_link2_desktop_img">
+            <input id="f_parceiro_link2_mobile_img">
+            <input id="f_parceiro_link2_url">
         </label>
         <button class="btn-salvar" id="btn-salvar">Salvar e publicar</button>
     </fieldset>
@@ -159,32 +161,34 @@ async function carregar() {
         // 
         $('f_cabecalho_mobile_img').value = d.cabecalho_mobile_img || '';
         //
-        $('f_menu_link_1_titulo').value = d.menu_link_1_titulo || '';
-        $('f_menu_link_1_url').value = d.menu_link_1_url || '';
-        $('f_menu_link_2_titulo').value = d.menu_link_2_titulo || '';
-        $('f_menu_link_2_url').value = d.menu_link_2_url || '';
-        $('f_menu_link_3_titulo').value = d.menu_link_3_titulo || '';
-        $('f_menu_link_3_url').value = d.menu_link_3_url || '';
-        $('f_menu_link_4_titulo').value = d.menu_link_4_titulo || '';
-        $('f_menu_link_4_url').value = d.menu_link_4_url || '';
-        $('f_menu_link_5_titulo').value = d.menu_link_5_titulo || '';
-        $('f_menu_link_5_url').value = d.menu_link_5_url || '';
+        $('f_menu_link1_titulo').value = d.menu_link1_titulo || '';
+        $('f_menu_link1_url').value = d.menu_link1_url || '';
+        $('f_menu_link2_titulo').value = d.menu_link2_titulo || '';
+        $('f_menu_link2_url').value = d.menu_link2_url || '';
+        $('f_menu_link3_titulo').value = d.menu_link3_titulo || '';
+        $('f_menu_link3_url').value = d.menu_link3_url || '';
+        $('f_menu_link4_titulo').value = d.menu_link4_titulo || '';
+        $('f_menu_link4_url').value = d.menu_link4_url || '';
+        $('f_menu_link5_titulo').value = d.menu_link5_titulo || '';
+        $('f_menu_link5_url').value = d.menu_link5_url || '';
         // 
         $('f_submenu_link_titulo').value = d.submenu_link_titulo || '';
         $('f_submenu_link_url').value = d.submenu_link_url || '';
-        $('f_submenu_link_1_titulo').value = d.submenu_link_1_titulo || '';
-        $('f_submenu_link_1_url').value = d.submenu_link_1_url || '';
-        $('f_submenu_link_2_titulo').value = d.submenu_link_2_titulo || '';
-        $('f_submenu_link_2_url').value = d.submenu_link_2_url || '';
-        $('f_submenu_link_3_titulo').value = d.submenu_link_3_titulo || '';
-        $('f_submenu_link_3_url').value = d.submenu_link_3_url || '';
-        $('f_submenu_link_4_titulo').value = d.submenu_link_4_titulo || '';
-        $('f_submenu_link_4_url').value = d.submenu_link_4_url || '';
+        $('f_submenu_link1_titulo').value = d.submenu_link1_titulo || '';
+        $('f_submenu_link1_url').value = d.submenu_link1_url || '';
+        $('f_submenu_link2_titulo').value = d.submenu_link2_titulo || '';
+        $('f_submenu_link2_url').value = d.submenu_link2_url || '';
+        $('f_submenu_link3_titulo').value = d.submenu_link3_titulo || '';
+        $('f_submenu_link3_url').value = d.submenu_link3_url || '';
+        $('f_submenu_link4_titulo').value = d.submenu_link4_titulo || '';
+        $('f_submenu_link4_url').value = d.submenu_link4_url || '';
         //
-        $('f_parceiro_link_1_img').value = d.parceiro_link_1_img || '';
-        $('f_parceiro_link_1_url').value = d.parceiro_link_1_url || '';
-        $('f_parceiro_link_2_img').value = d.parceiro_link_2_img || '';
-        $('f_parceiro_link_2_url').value = d.parceiro_link_2_url || '';
+        $('f_parceiro_link1_desktop_img').value = d.parceiro_link1_desktop_img || '';
+        $('f_parceiro_link1_mobile_img').value = d.parceiro_link1_mobile_img || '';
+        $('f_parceiro_link1_url').value = d.parceiro_link1_url || '';
+        $('f_parceiro_link2_desktop_img').value = d.parceiro_link2_desktop_img || '';
+        $('f_parceiro_link2_mobile_img').value = d.parceiro_link2_mobile_img || '';
+        $('f_parceiro_link2_url').value = d.parceiro_link2_url || '';
         msg('Conteúdo carregado.', 'okay');
     } catch (e) { msg('Erro ao carregar: ' + e.message, 'erro'); }
 }
@@ -197,32 +201,34 @@ async function salvar() {
         //
         cabecalho_mobile_img: $('f_cabecalho_mobile_img').value,
         //
-        menu_link_1_titulo: $('f_menu_link_1_titulo').value,
-        menu_link_1_url: $('f_menu_link_1_url').value,
-        menu_link_2_titulo: $('f_menu_link_2_titulo').value,
-        menu_link_2_url: $('f_menu_link_2_url').value,
-        menu_link_3_titulo: $('f_menu_link_3_titulo').value,
-        menu_link_3_url: $('f_menu_link_3_url').value,
-        menu_link_4_titulo: $('f_menu_link_4_titulo').value,
-        menu_link_4_url: $('f_menu_link_4_url').value,
-        menu_link_5_titulo: $('f_menu_link_5_titulo').value,
-        menu_link_5_url: $('f_menu_link_5_url').value,
+        menu_link1_titulo: $('f_menu_link1_titulo').value,
+        menu_link1_url: $('f_menu_link1_url').value,
+        menu_link2_titulo: $('f_menu_link2_titulo').value,
+        menu_link2_url: $('f_menu_link2_url').value,
+        menu_link3_titulo: $('f_menu_link3_titulo').value,
+        menu_link3_url: $('f_menu_link3_url').value,
+        menu_link4_titulo: $('f_menu_link4_titulo').value,
+        menu_link4_url: $('f_menu_link4_url').value,
+        menu_link5_titulo: $('f_menu_link5_titulo').value,
+        menu_link5_url: $('f_menu_link5_url').value,
         //
         submenu_link_titulo: $('f_submenu_link_titulo').value,
         submenu_link_url: $('f_submenu_link_url').value,
-        submenu_link_1_titulo: $('f_submenu_link_1_titulo').value,
-        submenu_link_1_url: $('f_submenu_link_1_url').value,
-        submenu_link_2_titulo: $('f_submenu_link_2_titulo').value,
-        submenu_link_2_url: $('f_submenu_link_2_url').value,
-        submenu_link_3_titulo: $('f_submenu_link_3_titulo').value,
-        submenu_link_3_url: $('f_submenu_link_3_url').value,
-        submenu_link_4_titulo: $('f_submenu_link_4_titulo').value,
-        submenu_link_4_url: $('f_submenu_link_4_url').value,
+        submenu_link1_titulo: $('f_submenu_link1_titulo').value,
+        submenu_link1_url: $('f_submenu_link1_url').value,
+        submenu_link2_titulo: $('f_submenu_link2_titulo').value,
+        submenu_link2_url: $('f_submenu_link2_url').value,
+        submenu_link3_titulo: $('f_submenu_link3_titulo').value,
+        submenu_link3_url: $('f_submenu_link3_url').value,
+        submenu_link4_titulo: $('f_submenu_link4_titulo').value,
+        submenu_link4_url: $('f_submenu_link4_url').value,
         //
-        parceiro_link_1_img: $('f_parceiro_link_1_img').value,
-        parceiro_link_1_url: $('f_parceiro_link_1_url').value,
-        parceiro_link_2_img: $('f_parceiro_link_2_img').value,
-        parceiro_link_2_url: $('f_parceiro_link_2_url').value
+        parceiro_link1_desktop_img: $('f_parceiro_link1_desktop_img').value,
+        parceiro_link1_mobile_img: $('f_parceiro_link1_mobile_img').value,
+        parceiro_link1_url: $('f_parceiro_link1_url').value,
+        parceiro_link2_desktop_img: $('f_parceiro_link2_desktop_img').value,
+        parceiro_link2_mobile_img: $('f_parceiro_link2_mobile_img').value,
+        parceiro_link2_url: $('f_parceiro_link2_url').value
     };
     try {
         const res = await fetch(api(), {
