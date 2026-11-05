@@ -11,6 +11,7 @@
     h1 { margin: 1rem 0; text-align: center; }
     .content { display: flex; justify-content: center; flex-wrap: wrap; margin: 0 auto; }
     .content fieldset { width: 90%; margin: 0 0 1.2rem; border: 1px solid #dddddd; border-radius: 8px; }
+    .content fieldset:nth-child(3) { margin-bottom: 1.2rem; }
     .line { width: 100%; margin-top: .2rem; padding-bottom: .5rem; position: relative; top: 18px; border-top: 1px solid #dddddd; }
     .legend {  width: 40px; position: relative; z-index: 1; background: #ffffff; }
     label { display: block; margin-top: 1rem; font-weight: bold; }
@@ -47,8 +48,8 @@
     </fieldset>
     <fieldset>
         <legend>Cabeçalho</legend>
-        <label>URL (Cabeçalho Mobile Link)
-            <input id="f_cabecalho_mobile_link_url">
+        <label>URL da Imagem (Mobile)
+            <input id="f_cabecalho_mobile_img">
         </label>
         <div class="line"></div>
         <legend class="legend">Menu</legend>
@@ -94,6 +95,16 @@
         <label>Título e URL (Link 4)
             <input id="f_submenu_link_4_titulo">
             <input id="f_submenu_link_4_url">
+        </label>
+        <div class="line"></div>
+        <legend class="legend">Parceiros</legend>
+        <label>URL da Imagem e Página (Link 1)
+            <input id="f_parceiro_link_1_img">
+            <input id="f_parceiro_link_1_url">
+        </label>
+        <label>URL da Imagem e Página (Link 2)
+            <input id="f_parceiro_link_2_img">
+            <input id="f_parceiro_link_2_url">
         </label>
         <button class="btn-salvar" id="btn-salvar">Salvar e publicar</button>
     </fieldset>
@@ -146,7 +157,7 @@ async function carregar() {
         shaAtual = arq.sha;
         const d = JSON.parse(fromB64(arq.content));
         // 
-        $('f_cabecalho_mobile_link_url').value = d.cabecalho_mobile_link_url || '';
+        $('f_cabecalho_mobile_img').value = d.cabecalho_mobile_img || '';
         //
         $('f_menu_link_1_titulo').value = d.menu_link_1_titulo || '';
         $('f_menu_link_1_url').value = d.menu_link_1_url || '';
@@ -169,6 +180,11 @@ async function carregar() {
         $('f_submenu_link_3_url').value = d.submenu_link_3_url || '';
         $('f_submenu_link_4_titulo').value = d.submenu_link_4_titulo || '';
         $('f_submenu_link_4_url').value = d.submenu_link_4_url || '';
+        //
+        $('f_parceiro_link_1_img').value = d.parceiro_link_1_img || '';
+        $('f_parceiro_link_1_url').value = d.parceiro_link_1_url || '';
+        $('f_parceiro_link_2_img').value = d.parceiro_link_2_img || '';
+        $('f_parceiro_link_2_url').value = d.parceiro_link_2_url || '';
         msg('Conteúdo carregado.', 'okay');
     } catch (e) { msg('Erro ao carregar: ' + e.message, 'erro'); }
 }
@@ -179,7 +195,7 @@ async function salvar() {
     msg('Publicando...');
     const dados = {
         //
-        cabecalho_mobile_link_url: $('f_cabecalho_mobile_link_url').value,
+        cabecalho_mobile_img: $('f_cabecalho_mobile_img').value,
         //
         menu_link_1_titulo: $('f_menu_link_1_titulo').value,
         menu_link_1_url: $('f_menu_link_1_url').value,
@@ -202,6 +218,11 @@ async function salvar() {
         submenu_link_3_url: $('f_submenu_link_3_url').value,
         submenu_link_4_titulo: $('f_submenu_link_4_titulo').value,
         submenu_link_4_url: $('f_submenu_link_4_url').value,
+        //
+        parceiro_link_1_img: $('f_parceiro_link_1_img').value,
+        parceiro_link_1_url: $('f_parceiro_link_1_url').value,
+        parceiro_link_2_img: $('f_parceiro_link_2_img').value,
+        parceiro_link_2_url: $('f_parceiro_link_2_url').value
     };
     try {
         const res = await fetch(api(), {

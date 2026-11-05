@@ -17,7 +17,7 @@
     .content { max-width: 1920px; }
     .content fieldset { display: inline-block; width: 30%; height: min-content; margin: 0; }
     .content fieldset:nth-child(1) { margin: 0 .6rem 0 0; border-top-right-radius: 0; border-bottom-right-radius: 0; } 
-    .content fieldset:nth-child(2) { margin: 0 0 0 .6rem; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+    .content fieldset:nth-child(2) { margin: 0 0 1.2rem .6rem; border-top-left-radius: 0; border-bottom-left-radius: 0; }
     }
 </style>
 </head>
@@ -25,8 +25,8 @@
     <div class="content">
         <fieldset>
             <legend>Cabeçalho</legend>
-            <label>URL (Cabeçalho Mobile Link)
-                <input id="cabecalho_mobile_link_url">
+            <label>URL da Imagem (Mobile)
+                <input id="cabecalho_mobile_img">
             </label>
             <div class="line"></div>
             <legend class="legend">Menu</legend>
@@ -72,6 +72,16 @@
             <label>Título e URL (Link 4)
                 <input id="submenu_link_4_titulo">
                 <input id="submenu_link_4_url">
+            </label>
+            <div class="line"></div>
+            <legend class="legend">Parceiros</legend>
+            <label>URL da Imagem e Página (Link 1)
+                <input id="parceiro_link_1_img">
+                <input id="parceiro_link_1_url">
+            </label>
+            <label>URL da Imagem e Página (Link 2)
+                <input id="parceiro_link_2_img">
+                <input id="parceiro_link_2_url">
             </label>
         </fieldset>
     </div>
