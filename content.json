@@ -1,0 +1,23 @@
+{
+    "cabecalho_mobile_link_url": "https://i.imgur.com/CiICg6j.png",
+    "menu_link_1_titulo": "Início",
+    "menu_link_1_url": "/",
+    "menu_link_2_titulo": "Contato",
+    "menu_link_2_url": "https://inovatorgames.blogspot.com/2018/11/contato.html",
+    "menu_link_3_titulo": "Mapa do Site",
+    "menu_link_3_url": "https://inovatorgames.blogspot.com/p/mapa-do-site.html",
+    "menu_link_4_titulo": "Parceria",
+    "menu_link_4_url": "https://inovatorgames.blogspot.com/2018/11/parceria.html",
+    "menu_link_5_titulo": "Pedidos",
+    "menu_link_5_url": "https://inovatorgames.blogspot.com/2018/11/pedidos.html",
+    "submenu_link_titulo": "Redes Sociais",
+    "submenu_link_url": "javascript:void(0);",    
+    "submenu_link_1_titulo": "GitHub",
+    "submenu_link_1_url": "https://github.com/jerryeduardo/",
+    "submenu_link_2_titulo": "Instagram",
+    "submenu_link_2_url": "javascript:void(0);",
+    "submenu_link_3_titulo": "TikTok",
+    "submenu_link_3_url": "javascript:void(0);",
+    "submenu_link_4_titulo": "Youtube",
+    "submenu_link_4_url": "javascript:void(0);"
+}

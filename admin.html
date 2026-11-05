@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Painel</title>
+<style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0 1rem; color: #000000; }
+    .okay { color: #1a7f37; } .erro { color: #cf222e; }
+    h1 { margin: 1rem 0; text-align: center; }
+    .content { display: flex; justify-content: center; flex-wrap: wrap; margin: 0 auto; }
+    .content fieldset { width: 90%; margin: 0 0 1.2rem; border: 1px solid #dddddd; border-radius: 8px; }
+    .line { width: 100%; margin-top: .2rem; padding-bottom: .5rem; position: relative; top: 18px; border-top: 1px solid #dddddd; }
+    .legend {  width: 40px; position: relative; z-index: 1; background: #ffffff; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input { width: 100%; margin-top: .3rem; padding: .6rem; box-sizing: border-box; font-weight: normal; border: 1px solid #bbbbbb; border-radius: 6px; }
+    small { color: #666666; }
+    button { margin-top: 1.2rem; padding: .7rem 1.2rem; font: inherit; border: 0; border-radius: 6px; color: #fff; cursor: pointer; }
+    .btn-carregar { background: #666666; }
+    .btn-salvar { background: #1f6feb; }
+    #msg { min-height: 1.4rem; margin-top: 1rem; }
+    #msg:empty { display: none; }
+    @media screen and (min-width: 1200px) {
+    .content { max-width: 1920px; }
+    .content fieldset { display: inline-block; width: 30%; height: min-content; margin: 0; }
+    .content fieldset:nth-child(2) { margin-left: 1.2rem; margin-right: 1.2rem; padding-bottom: 1.2rem; border-top-right-radius: 0; border-bottom-right-radius: 0; } 
+    .content fieldset:nth-child(3) { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+    }
+</style>
+</head>
+<body>
+<h1>Painel</h1>
+
+<div class="content">
+    <fieldset>
+        <legend>Conexão com o GitHub</legend>
+        <label>Usuário ou organização <input id="owner" placeholder="meu-usuario"></label>
+        <label>Repositório <input id="repo" placeholder="meu-site"></label>
+        <label>Branch <input id="branch" value="main"></label>
+        <label>Token de acesso (fine-grained, permissão Contents: Read and write)
+        <input id="token" type="password" placeholder="github_pat_...">
+        </label>
+        <small>Ficam salvos só neste navegador (localStorage).</small><br>
+        <button class="btn-carregar" id="btn-carregar">Carregar conteúdo atual</button>
+        <div id="msg"></div>
+    </fieldset>
+    <fieldset>
+        <legend>Cabeçalho</legend>
+        <label>URL (Cabeçalho Mobile Link)
+            <input id="f_cabecalho_mobile_link_url">
+        </label>
+        <div class="line"></div>
+        <legend class="legend">Menu</legend>
+        <label>Título e URL (Link 1)
+            <input id="f_menu_link_1_titulo">
+            <input id="f_menu_link_1_url">
+        </label>
+        <label>Título e URL (Link 2)
+            <input id="f_menu_link_2_titulo">
+            <input id="f_menu_link_2_url">
+        </label>
+        <label>Título e URL (Link 3)
+            <input id="f_menu_link_3_titulo">
+            <input id="f_menu_link_3_url">
+        </label>
+        <label>Título e URL (Link 4)
+            <input id="f_menu_link_4_titulo">
+            <input id="f_menu_link_4_url">
+        </label>
+        <label>Título e URL (Link 5)
+            <input id="f_menu_link_5_titulo">
+            <input id="f_menu_link_5_url">
+        </label>
+    </fieldset>
+    <fieldset>
+        <legend>Submenu</legend>
+        <label>Título e URL (Submenu Link)
+            <input id="f_submenu_link_titulo">
+            <input id="f_submenu_link_url">
+        </label>
+        <label>Título e URL (Link 1)
+            <input id="f_submenu_link_1_titulo">
+            <input id="f_submenu_link_1_url">
+        </label>
+        <label>Título e URL (Link 2)
+            <input id="f_submenu_link_2_titulo">
+            <input id="f_submenu_link_2_url">
+        </label>
+        <label>Título e URL (Link 3)
+            <input id="f_submenu_link_3_titulo">
+            <input id="f_submenu_link_3_url">
+        </label>
+        <label>Título e URL (Link 4)
+            <input id="f_submenu_link_4_titulo">
+            <input id="f_submenu_link_4_url">
+        </label>
+        <button class="btn-salvar" id="btn-salvar">Salvar e publicar</button>
+    </fieldset>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const ARQUIVO = 'content.json';
+let shaAtual = null;
+
+// restaura configurações salvas
+['owner','repo','branch','token'].forEach(k => {
+    const v = localStorage.getItem('gh_' + k);
+    if (v) $(k).value = v;
+});
+
+function msg(texto, tipo) { $('msg').textContent = texto; $('msg').className = tipo || ''; }
+
+function salvarConfig() {
+    ['owner','repo','branch','token'].forEach(k => localStorage.setItem('gh_' + k, $(k).value.trim()));
+}
+
+function api() {
+    const o = $('owner').value.trim(), r = $('repo').value.trim();
+    return `https://api.github.com/repos/${o}/${r}/contents/${ARQUIVO}`;
+}
+
+function headers() {
+    return {
+        'Authorization': 'Bearer ' + $('token').value.trim(),
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+    };
+}
+
+// codifica/decodifica UTF-8 em base64 (acentos)
+const toB64 = s => btoa(unescape(encodeURIComponent(s)));
+const fromB64 = s => decodeURIComponent(escape(atob(s.replace(/\n/g, ''))));
+
+async function carregar() {
+    salvarConfig();
+    msg('Carregando...');
+    try {
+        const res = await fetch(api() + '?ref=' + $('branch').value.trim(), { headers: headers() });
+        if (!res.ok) {
+            const info = await res.json().catch(() => ({}));
+            throw new Error(res.status + ' - ' + (info.message || 'sem detalhes'));
+        }
+        const arq = await res.json();
+        shaAtual = arq.sha;
+        const d = JSON.parse(fromB64(arq.content));
+        // 
+        $('f_cabecalho_mobile_link_url').value = d.cabecalho_mobile_link_url || '';
+        //
+        $('f_menu_link_1_titulo').value = d.menu_link_1_titulo || '';
+        $('f_menu_link_1_url').value = d.menu_link_1_url || '';
+        $('f_menu_link_2_titulo').value = d.menu_link_2_titulo || '';
+        $('f_menu_link_2_url').value = d.menu_link_2_url || '';
+        $('f_menu_link_3_titulo').value = d.menu_link_3_titulo || '';
+        $('f_menu_link_3_url').value = d.menu_link_3_url || '';
+        $('f_menu_link_4_titulo').value = d.menu_link_4_titulo || '';
+        $('f_menu_link_4_url').value = d.menu_link_4_url || '';
+        $('f_menu_link_5_titulo').value = d.menu_link_5_titulo || '';
+        $('f_menu_link_5_url').value = d.menu_link_5_url || '';
+        // 
+        $('f_submenu_link_titulo').value = d.submenu_link_titulo || '';
+        $('f_submenu_link_url').value = d.submenu_link_url || '';
+        $('f_submenu_link_1_titulo').value = d.submenu_link_1_titulo || '';
+        $('f_submenu_link_1_url').value = d.submenu_link_1_url || '';
+        $('f_submenu_link_2_titulo').value = d.submenu_link_2_titulo || '';
+        $('f_submenu_link_2_url').value = d.submenu_link_2_url || '';
+        $('f_submenu_link_3_titulo').value = d.submenu_link_3_titulo || '';
+        $('f_submenu_link_3_url').value = d.submenu_link_3_url || '';
+        $('f_submenu_link_4_titulo').value = d.submenu_link_4_titulo || '';
+        $('f_submenu_link_4_url').value = d.submenu_link_4_url || '';
+        msg('Conteúdo carregado.', 'okay');
+    } catch (e) { msg('Erro ao carregar: ' + e.message, 'erro'); }
+}
+
+async function salvar() {
+    if (!shaAtual) return msg('Clique em "Carregar conteúdo atual" primeiro.', 'erro');
+    salvarConfig();
+    msg('Publicando...');
+    const dados = {
+        //
+        cabecalho_mobile_link_url: $('f_cabecalho_mobile_link_url').value,
+        //
+        menu_link_1_titulo: $('f_menu_link_1_titulo').value,
+        menu_link_1_url: $('f_menu_link_1_url').value,
+        menu_link_2_titulo: $('f_menu_link_2_titulo').value,
+        menu_link_2_url: $('f_menu_link_2_url').value,
+        menu_link_3_titulo: $('f_menu_link_3_titulo').value,
+        menu_link_3_url: $('f_menu_link_3_url').value,
+        menu_link_4_titulo: $('f_menu_link_4_titulo').value,
+        menu_link_4_url: $('f_menu_link_4_url').value,
+        menu_link_5_titulo: $('f_menu_link_5_titulo').value,
+        menu_link_5_url: $('f_menu_link_5_url').value,
+        //
+        submenu_link_titulo: $('f_submenu_link_titulo').value,
+        submenu_link_url: $('f_submenu_link_url').value,
+        submenu_link_1_titulo: $('f_submenu_link_1_titulo').value,
+        submenu_link_1_url: $('f_submenu_link_1_url').value,
+        submenu_link_2_titulo: $('f_submenu_link_2_titulo').value,
+        submenu_link_2_url: $('f_submenu_link_2_url').value,
+        submenu_link_3_titulo: $('f_submenu_link_3_titulo').value,
+        submenu_link_3_url: $('f_submenu_link_3_url').value,
+        submenu_link_4_titulo: $('f_submenu_link_4_titulo').value,
+        submenu_link_4_url: $('f_submenu_link_4_url').value,
+    };
+    try {
+        const res = await fetch(api(), {
+            method: 'PUT',
+            headers: headers(),
+            body: JSON.stringify({
+                message: 'Atualização pelo painel',
+                content: toB64(JSON.stringify(dados, null, 2)),
+                sha: shaAtual,
+                branch: $('branch').value.trim()
+            })
+        });
+        if (!res.ok) throw new Error('GitHub respondeu ' + res.status);
+        shaAtual = (await res.json()).content.sha;
+        msg('Publicado! O site atualiza em cerca de 1 minuto.', 'okay');
+    } catch (e) { msg('Erro ao salvar: ' + e.message, 'erro'); }
+}
+
+$('btn-carregar').onclick = carregar;
+$('btn-salvar').onclick = salvar;
+</script>
+</body>
+</html>

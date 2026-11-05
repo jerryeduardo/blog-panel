@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Início</title>
+<style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0 1rem; color: #000000; }
+    .content { display: flex; justify-content: center; flex-wrap: wrap; margin: 1.4rem auto 0; }
+    .content fieldset { width: 90%; margin-bottom: 1.2rem; border: 1px solid #dddddd; border-radius: 8px; }
+    .content fieldset input:nth-child(odd) { margin-bottom: .1rem; }
+    .line { width: 100%; margin-top: .2rem; padding-bottom: .5rem; position: relative; top: 18px; border-top: 1px solid #dddddd; }
+    .legend {  width: 40px; position: relative; z-index: 1; background: #ffffff; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input { width: 100%; margin-top: .3rem; padding: .6rem; box-sizing: border-box; font-weight: normal; border: 1px solid #bbbbbb; border-radius: 6px; }
+    @media screen and (min-width: 1200px) { 
+    .content { max-width: 1920px; }
+    .content fieldset { display: inline-block; width: 30%; height: min-content; margin: 0; }
+    .content fieldset:nth-child(1) { margin: 0 .6rem 0 0; border-top-right-radius: 0; border-bottom-right-radius: 0; } 
+    .content fieldset:nth-child(2) { margin: 0 0 0 .6rem; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+    }
+</style>
+</head>
+<body>
+    <div class="content">
+        <fieldset>
+            <legend>Cabeçalho</legend>
+            <label>URL (Cabeçalho Mobile Link)
+                <input id="cabecalho_mobile_link_url">
+            </label>
+            <div class="line"></div>
+            <legend class="legend">Menu</legend>
+            <label>Título e URL (Link 1)
+                <input id="menu_link_1_titulo">
+                <input id="menu_link_1_url">
+            </label>
+            <label>Título e URL (Link 2)
+                <input id="menu_link_2_titulo">
+                <input id="menu_link_2_url">
+            </label>
+            <label>Título e URL (Link 3)
+                <input id="menu_link_3_titulo">
+                <input id="menu_link_3_url">
+            </label>
+            <label>Título e URL (Link 4)
+                <input id="menu_link_4_titulo">
+                <input id="menu_link_4_url">
+            </label>
+            <label>Título e URL (Link 5)
+                <input id="menu_link_5_titulo">
+                <input id="menu_link_5_url">
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Submenu</legend>
+            <label>Título e URL (Submenu Link)
+                <input id="submenu_link_titulo">
+                <input id="submenu_link_url">
+            </label>
+            <label>Título e URL (Link 1)
+                <input id="submenu_link_1_titulo">
+                <input id="submenu_link_1_url">
+            </label>
+            <label>Título e URL (Link 2)
+                <input id="submenu_link_2_titulo">
+                <input id="submenu_link_2_url">
+            </label>
+            <label>Título e URL (Link 3)
+                <input id="submenu_link_3_titulo">
+                <input id="submenu_link_3_url">
+            </label>
+            <label>Título e URL (Link 4)
+                <input id="submenu_link_4_titulo">
+                <input id="submenu_link_4_url">
+            </label>
+        </fieldset>
+    </div>
+
+<script>
+    // ?v= evita cache do navegador ao buscar o JSON atualizado
+    fetch('content.json?v=' + Date.now())
+        .then(r => r.json())
+        .then(d => {
+            Object.keys(d).forEach(chave => {
+                const el = document.getElementById(chave);
+                if (el) el.value = d[chave];
+            });
+        })
+        .catch(erro => {
+            console.error(erro);
+            menu_link_1_titulo.value = 'Erro ao carregar o conteúdo';
+        });
+</script>
+</body>
+</html>
